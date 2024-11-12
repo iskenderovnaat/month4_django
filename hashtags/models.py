@@ -13,7 +13,7 @@ class Tag(models.Model):
 
 class Hashtag(models.Model):
     title = models.CharField(max_length=200)
-    prise = models.FloatField(default=0, verbose_name='Цена')
+    price = models.FloatField(default=0, verbose_name='Цена',null=True)
     tags = models.ManyToManyField(Tag, verbose_name='Тэги')
 
     def __str__(self):
