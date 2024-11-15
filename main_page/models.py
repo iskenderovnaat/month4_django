@@ -19,6 +19,19 @@ class Books(models.Model):
     pages = models.CharField(max_length=50, verbose_name='Укажите количество страниц в книге')
     author = models.CharField(max_length=30, verbose_name='Укажите автора книги')
     audio_book = models.URLField(verbose_name='Укажите ссылку на аудио-книгу')
+    created_at = models.DateTimeField(auto_now_add=True)
+    stock_count = models.PositiveIntegerField(default=0, verbose_name="Количество книг в наличии")
+
+    def reduce_stock(self):
+        if self.stock_count > 0:
+            self.stock_count -= 1
+            self.save()
+
+    def average_rating(self):
+        reviews = self.reviews_books.all()
+        if reviews:
+            return sum(review.mark for review in reviews) / reviews.count()
+        return None
 
     class Meta:
         verbose_name = 'Книга'
