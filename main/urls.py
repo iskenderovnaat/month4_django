@@ -13,6 +13,9 @@ urlpatterns = [
     path('', include('hashtags.urls')),
     path('', include('basket.urls')),
     path('', include('cbv.urls')),
+    path('', include('parcing_books.urls')),
+
+
 
 
 
