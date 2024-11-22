@@ -24,6 +24,7 @@ def get_data(html):
         title = item.h3.a['title']
         image = URL + '/' + item.find('img')['src'].replace('../../', '')
         price = item.find('p', class_='price_color').text
+        price = price.replace('Â£','')
         rating = item.find('p') ['class'][1]
         books_list.append({
             'title': title,
