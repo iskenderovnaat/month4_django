@@ -14,6 +14,7 @@ urlpatterns = [
     path('', include('basket.urls')),
     path('', include('cbv.urls')),
     path('', include('parcing_books.urls')),
+    path('', include("users.urls")),
 
 
 
