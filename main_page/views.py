@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.views import generic
 from . import models
 import datetime
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
 
 class SearchView(generic.ListView):
     template_name = 'book.html'
@@ -10,7 +13,7 @@ class SearchView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return models.Books.objects.filter(title__icontains=self.request.GET.get('q')).order_by('-id')
+        return models.Books.objects.select_related().order_by('-id')
 
     def get_context_data(self, ** kwargs):
         context = super().get_context_data(**kwargs)
@@ -18,6 +21,7 @@ class SearchView(generic.ListView):
         return context
 
 
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class BooksListView(generic.ListView):
     template_name = 'book.html'
     context_object_name = 'books_list'
