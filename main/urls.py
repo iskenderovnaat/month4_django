@@ -16,6 +16,8 @@ urlpatterns = [
     path('', include('cbv.urls')),
     path('', include('parcing_books.urls')),
     path('', include("users.urls")),
+    path('', include("mobile_devices.urls")),
+
 
 
 
